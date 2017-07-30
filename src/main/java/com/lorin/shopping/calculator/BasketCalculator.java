@@ -1,13 +1,11 @@
 package com.lorin.shopping.calculator;
 
+import com.lorin.shopping.domain.Basket;
+import com.lorin.shopping.domain.Item;
 import com.lorin.shopping.domain.PriceList;
 import com.lorin.shopping.validator.BasketValidator;
 
 import java.util.Arrays;
-import java.util.Map;
-import java.util.Objects;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class BasketCalculator {
 
@@ -22,7 +20,8 @@ public class BasketCalculator {
         this.basketValidator = new BasketValidator(priceList);
     }
 
-    public long calculate(String... basket) {
+
+    public long calculate(Basket basket) {
 
         basketValidator.validateBasket(basket);
 
@@ -31,8 +30,9 @@ public class BasketCalculator {
         return totalCost;
     }
 
-    private int calculateTotal(String[] basket) {
-        return Arrays.stream(basket).mapToInt(priceList::getItemPrice).sum();
+
+    private int calculateTotal(Basket basket) {
+        return Arrays.stream(basket.getItems()).map(Item::getName).mapToInt(priceList::getItemPrice).sum();
     }
 
 }

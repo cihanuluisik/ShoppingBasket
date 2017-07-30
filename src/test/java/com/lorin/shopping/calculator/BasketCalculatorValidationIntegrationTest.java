@@ -1,6 +1,7 @@
 package com.lorin.shopping.calculator;
 
 import com.lorin.shopping.common.BasketTestHelper;
+import com.lorin.shopping.domain.Basket;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
@@ -14,21 +15,7 @@ public class BasketCalculatorValidationIntegrationTest {
     @Test
     public void givenEmptyOrNullPriceListBasketCalculatorConstructionFails() throws Exception {
         assertThat(catchThrowable( () -> new BasketCalculator(null))).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("Some item price must be given");
-    }
-
-    @Test
-    public void givenSingleNullItemShouldThrowRuntime() throws Exception {
-        assertGivenBasketGivesGivenError("Item can not be null!", null);
-    }
-
-    @Test
-    public void givenSecondItemNullShouldThrowRuntime() throws Exception {
-        assertGivenBasketGivesGivenError("Item can not be null!", "Apple", null);
-    }
-    @Test
-    public void givenMidItemNullShouldThrowRuntime() throws Exception {
-        assertGivenBasketGivesGivenError("Item can not be null!", "Apple", null, "Apple");
+                                            .hasMessage("Some item price must be given");
     }
 
     @Test
@@ -43,11 +30,11 @@ public class BasketCalculatorValidationIntegrationTest {
 
     @Test
     public void givenItemNamesInRandomCapsShouldCalculateCorrect() throws Exception {
-        assertThat(basketCalculator.calculate("APPLE", "baNaNA", "melon","lIMe")).isEqualTo(120);
+        assertThat(basketCalculator.calculate(new Basket("APPLE", "baNaNA", "melon","lIMe"))).isEqualTo(120);
     }
 
     private void assertGivenBasketGivesGivenError(String errorMessage, String... basket) {
-        Assertions.assertThat(Assertions.catchThrowable(() -> basketCalculator.calculate(basket)))
+        Assertions.assertThat(Assertions.catchThrowable(() -> basketCalculator.calculate(new Basket(basket))))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(errorMessage);
     }

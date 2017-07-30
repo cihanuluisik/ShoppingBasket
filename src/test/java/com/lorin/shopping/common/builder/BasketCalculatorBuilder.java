@@ -2,7 +2,7 @@ package com.lorin.shopping.common.builder;
 
 
 import com.lorin.shopping.calculator.BasketCalculator;
-import com.lorin.shopping.domain.Item;
+import com.lorin.shopping.domain.ItemPrice;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,14 +11,14 @@ import static com.lorin.shopping.common.builder.PriceListBuilder.newPriceList;
 
 public class BasketCalculatorBuilder {
 
-    final private List<Item> itemsList = new ArrayList<>();
+    final private List<ItemPrice> itemsList = new ArrayList<>();
 
     public static BasketCalculatorBuilder newBasketCalculator() {
         return new BasketCalculatorBuilder();
     }
 
-    public BasketCalculatorBuilder withItemPrice(Item item) {
-        itemsList.add(item);
+    public BasketCalculatorBuilder withItemPrice(ItemPrice itemPrice) {
+        itemsList.add(itemPrice);
         return this;
     }
 

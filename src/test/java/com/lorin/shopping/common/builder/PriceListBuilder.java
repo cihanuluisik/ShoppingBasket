@@ -1,6 +1,6 @@
 package com.lorin.shopping.common.builder;
 
-import com.lorin.shopping.domain.Item;
+import com.lorin.shopping.domain.ItemPrice;
 import com.lorin.shopping.domain.PriceList;
 
 import java.util.ArrayList;
@@ -8,9 +8,9 @@ import java.util.List;
 
 public class PriceListBuilder {
 
-    final private List<Item> itemsList = new ArrayList<>();
+    final private List<ItemPrice> itemsList = new ArrayList<>();
 
-    public PriceListBuilder(List<Item> itemsList) {
+    public PriceListBuilder(List<ItemPrice> itemsList) {
         this.itemsList.addAll(itemsList);
     }
     public PriceListBuilder() {
@@ -20,7 +20,7 @@ public class PriceListBuilder {
         return new PriceListBuilder();
     }
 
-    public static PriceListBuilder newPriceList(List<Item> itemsList) {
+    public static PriceListBuilder newPriceList(List<ItemPrice> itemsList) {
         return new PriceListBuilder(itemsList);
     }
 
